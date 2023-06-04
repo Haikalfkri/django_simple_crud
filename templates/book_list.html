@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
+      integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+      crossorigin="anonymous"
+    />
+    <title>Book List</title>
+  </head>
+  <body>
+    <div class="container">
+        <div class="card mt-5">
+            <div class="card-header">
+            <h1>Book Records</h1>
+            <a
+                href="{% url 'book_app:create' %}"
+                type="button"
+                class="btn btn-primary float-right"
+                >Tambah</a
+            >
+            </div>
+            <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-bordered table-hover">
+                <thead>
+                    <th>No</th>
+                    <th>Name</th>
+                    <th>Author</th>
+                    <th>Description</th>
+                    <th>Action</th>
+                </thead>
+                {%  if all_book %}
+                <tbody>
+                    {% for book in all_book %}
+                    <tr>
+                        <td>{{ book.id }}</td>
+                        <td>{{ book.book_name }}</td>
+                        <td>{{ book.author }}</td>
+                        <td>{{ book.description }}</td>
+                        <td>
+                            <a href="{% url 'book_app:update' book.id %}" class="btn btn-success">update</a>
+                            <a href="{% url 'book_app:delete' book.id %}" class="btn btn-danger">delete</a>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+                {% endif %}
+                </table>
+            </div>
+            </div>
+        </div>
+    </div>
+  </body>
+</html>
